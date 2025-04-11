@@ -9,7 +9,7 @@ class Urltracker < Formula
 
   def install
     # Este é um script direto, então basta copiá-lo para o bin e torná-lo executável
-    bin.install Dir["urltracker-1.0.0/urltracker.sh"].first => "urltracker"
+    bin.install Dir["urltracker-1.0.0/urltracker"].first => "urltracker"
     chmod 0755, bin/"urltracker"
   end
 
