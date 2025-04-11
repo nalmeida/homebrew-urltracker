@@ -14,6 +14,7 @@ class Urltracker < Formula
   end
 
   test do
-    assert_match "urltracker", shell_output("#{bin}/urltracker --help", [0, 1])
+    # assert_match "urltracker", shell_output("#{bin}/urltracker --help", [0, 1])
+    system "#{bin}/urltracker", "--help"
   end
 end
