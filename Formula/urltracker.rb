@@ -8,9 +8,9 @@ class Urltracker < Formula
   depends_on "curl" => "8.7.1"
 
   def install
-    # Este é um script direto, então basta copiá-lo para o bin e torná-lo executável
-    bin.install Dir["urltracker-1.0.0/urltracker"].first => "urltracker"
-    chmod 0755, bin/"urltracker"
+    bin.install "./urltracker.sh" => "urltracker"
+    # bin.install Dir["urltracker-1.0.0/urltracker"].first => "urltracker"
+    # chmod 0755, bin/"urltracker"
   end
 
   test do
