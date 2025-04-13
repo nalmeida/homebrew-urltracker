@@ -5,6 +5,8 @@ class Urltracker < Formula
   sha256 "2980f865d0f749bfe9d6abcbb73f7d26347eefedf5617899a269cc7d36f0ccbf"
   license "MIT"
 
+  depends_on "curl" => "8.7.1"
+
   def install
     bin.install "urltracker-1.0.0/urltracker.sh" => "urltracker"
     chmod 0755, bin/"urltracker"
