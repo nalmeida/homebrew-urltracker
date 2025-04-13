@@ -6,13 +6,11 @@ class Urltracker < Formula
   license "MIT"
 
   def install
-    bin.install "urltracker.sh"
-    # bin.install Dir["urltracker-1.0.0/urltracker"].first => "urltracker"
-    # chmod 0755, bin/"urltracker"
+    bin.install "urltracker-1.0.0/urltracker.sh" => "urltracker"
+    chmod 0755, bin/"urltracker"
   end
 
   test do
-    # assert_match "urltracker", shell_output("#{bin}/urltracker --help", [0, 1])
-    system "#{bin}/urltracker.sh", "--help"
+    system "#{bin}/urltracker", "--version"
   end
 end
