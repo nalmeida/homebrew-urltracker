@@ -8,8 +8,7 @@ class Urltracker < Formula
   depends_on "curl" => "8.7.1"
 
   def install
-    bin.install "urltracker-1.0.0/urltracker.sh" => "urltracker"
-    chmod 0755, bin/"urltracker"
+    bin.install "urltracker.sh" => "urltracker"
   end
 
   test do
