@@ -1,8 +1,8 @@
 class Urltracker < Formula
   desc "Track redirects and view full redirect chains from a URL"
   homepage "https://github.com/nalmeida/urltracker"
-  url "https://github.com/nalmeida/urltracker/archive/refs/tags/v1.0.1.tar.gz"
-  sha256 "53bd088ad97d15207f949cd079ca466236bf3b4014837bda306334c50539c30f"
+  url "https://github.com/nalmeida/urltracker/archive/refs/tags/v1.0.2.tar.gz"
+  sha256 "0e85c15019e946abb5100fc420f2d47a1be858df497ad8aac77bfaa290f4b830"
 
   license "MIT"
 
