@@ -22,6 +22,6 @@ curl -sL https://github.com/nalmeida/urltracker/archive/refs/tags/v1.0.1.tar.gz 
 
 ```
 brew cleanup --prune=all
+brew uninstall urltracker
 brew untap nalmeida/urltracker
-brew uninstall nalmeida/urltracker
 ```
