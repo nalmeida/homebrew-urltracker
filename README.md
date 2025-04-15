@@ -14,7 +14,7 @@ brew install urltracker
 ## How to get the sha256 from a URL
 
 ```bash
-curl -sL https://github.com/usuario/repositorio/archive/refs/tags/v1.0.0.tar.gz | sha256
+curl -sL https://github.com/nalmeida/urltracker/archive/refs/tags/v1.0.1.tar.gz | sha256
 ```
 
 
