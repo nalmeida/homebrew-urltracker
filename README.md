@@ -12,7 +12,7 @@ urltracker Github project: https://github.com/nalmeida/urltracker/
 
 ## Install
 
-```
+```bash
 brew tap nalmeida/urltracker
 brew install urltracker
 ```
@@ -21,7 +21,7 @@ brew install urltracker
 
 ### Uninstall
 
-```
+```bash
 brew cleanup --prune=all
 brew uninstall urltracker
 brew untap nalmeida/urltracker
