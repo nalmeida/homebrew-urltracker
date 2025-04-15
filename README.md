@@ -25,3 +25,8 @@ brew cleanup --prune=all
 brew uninstall urltracker
 brew untap nalmeida/urltracker
 ```
+
+## Acknowledgments
+
+* [Mark Vogelgesang homebrew formula sample](https://github.com/mvogelgesang/homebrew-tiny-sh-example)
+* [Daniele Fongo homebrew forma sample](https://github.com/danielefongo/homebrew-formula-example)
