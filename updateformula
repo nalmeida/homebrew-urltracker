@@ -1,0 +1,117 @@
+#!/bin/bash
+
+# updateformula - Update the Homebrew formula for urltracker
+# This script updates the version, URL, and SHA256 hash in both the Homebrew formula and README.md
+
+# Usage function
+show_help() {
+  echo "Usage: ./updateformula VERSION"
+  echo "Updates the urltracker Homebrew formula with a new version"
+  echo ""
+  echo "Arguments:"
+  echo "  VERSION    Version tag (e.g., v1.0.1)"
+  echo ""
+  echo "Examples:"
+  echo "  ./updateformula v1.0.2"
+  echo "  ./updateformula v2.0.0"
+  echo ""
+  echo "The script will update:"
+  echo "1. The URL and SHA256 hash in ./Formula/urltracker.rb"
+  echo "2. The version, SHA256, and package URL in ./README.md"
+}
+
+# Check if help is requested
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  show_help
+  exit 0
+fi
+
+# Check if version parameter was provided
+if [ -z "$1" ]; then
+  echo "Error: Version parameter is required"
+  show_help
+  exit 1
+fi
+
+# Define variables
+VERSION="$1"
+FORMULA_PATH="./Formula/urltracker.rb"
+README_PATH="./README.md"
+BASE_URL="https://github.com/nalmeida/urltracker/archive/refs/tags"
+NEW_URL="$BASE_URL/$VERSION.tar.gz"
+
+# Check if formula file exists
+if [ ! -f "$FORMULA_PATH" ]; then
+  echo "Error: Formula file not found at $FORMULA_PATH"
+  exit 1
+fi
+
+# Check if README file exists
+if [ ! -f "$README_PATH" ]; then
+  echo "Error: README file not found at $README_PATH"
+  exit 1
+fi
+
+# Check if the new version exists by following redirects and checking final status
+echo "Checking if version $VERSION exists..."
+HTTP_RESPONSE=$(curl -s -L -I "$NEW_URL")
+FINAL_STATUS=$(echo "$HTTP_RESPONSE" | grep -i "^HTTP" | tail -n 1 | awk '{print $2}')
+
+if [[ -z "$FINAL_STATUS" || "$FINAL_STATUS" != "200" ]]; then
+  echo "Error: Version $VERSION not found at $NEW_URL (Final status: $FINAL_STATUS)"
+  exit 1
+fi
+
+echo "Version $VERSION found (HTTP status after following redirects: $FINAL_STATUS)"
+
+# Calculate SHA256 hash for the new version
+echo "Calculating SHA256 hash for $VERSION..."
+NEW_SHA256=$(curl -sL "$NEW_URL" | shasum -a 256 | cut -d ' ' -f 1)
+
+if [ -z "$NEW_SHA256" ]; then
+  echo "Error: Failed to calculate SHA256 hash"
+  exit 1
+fi
+
+echo "New SHA256: $NEW_SHA256"
+
+# Update the formula file
+echo "Updating formula at $FORMULA_PATH..."
+
+# Replace URL and SHA256 in the formula file
+sed -i '' "s|url \".*\"|url \"$NEW_URL\"|" "$FORMULA_PATH"
+sed -i '' "s|sha256 \".*\"|sha256 \"$NEW_SHA256\"|" "$FORMULA_PATH"
+
+echo "Formula updated successfully!"
+
+# Update the README.md file with a much more direct approach
+echo "Updating README at $README_PATH..."
+
+# Create a temporary file
+TEMP_FILE=$(mktemp)
+
+# Process the README line by line
+while IFS= read -r line; do
+  # Check for Version line and replace it
+  if [[ "$line" == *"* Version: \`v"* ]]; then
+    echo "* Version: \`$VERSION\`" >> "$TEMP_FILE"
+  # Check for SHA256 line and replace it
+  elif [[ "$line" == *"* SHA256: \`"* ]]; then
+    echo "* SHA256: \`$NEW_SHA256\`" >> "$TEMP_FILE"
+  # Check for Package line and replace it
+  elif [[ "$line" == *"* Package: https://github.com/nalmeida/urltracker/archive/refs/tags/"* ]]; then
+    echo "* Package: $NEW_URL" >> "$TEMP_FILE"
+  # Keep other lines as they are
+  else
+    echo "$line" >> "$TEMP_FILE"
+  fi
+done < "$README_PATH"
+
+# Replace the original file with the updated one
+mv "$TEMP_FILE" "$README_PATH"
+
+echo "README updated successfully!"
+echo "URL: $NEW_URL"
+echo "SHA256: $NEW_SHA256"
+
+exit 0
