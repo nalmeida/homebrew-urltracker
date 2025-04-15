@@ -1,2 +1,27 @@
 # homebrew-urltracker
-Homebrew installer of urltracker
+
+> Homebrew installer of urltracker
+
+urltracker Github project: https://github.com/nalmeida/urltracker/
+
+## Install
+
+```
+brew tap nalmeida/urltracker
+brew install urltracker
+```
+
+## How to get the sha256 from a URL
+
+```bash
+curl -sL https://github.com/usuario/repositorio/archive/refs/tags/v1.0.0.tar.gz | sha256
+```
+
+
+## Troubleshooting / Uninstall
+
+```
+brew cleanup --prune=all
+brew untap nalmeida/urltracker
+brew uninstall nalmeida/urltracker
+```
