@@ -6,9 +6,9 @@ urltracker Github project: https://github.com/nalmeida/urltracker/
 
 ## Latest Version
 
-* Version: `v1.2.0`
-* SHA256: `32a4742e0d205d9dcb23bc22dca1ac3e49c9bacffab30e9176ffd05aa5e0e1fc`
-* Package: https://github.com/nalmeida/urltracker/archive/refs/tags/v1.2.0.tar.gz
+* Version: `v1.2.1`
+* SHA256: `0de18c9541d9c581c773eed0c9ee08fa64029c413bd455801456504fbd684a74`
+* Package: https://github.com/nalmeida/urltracker/archive/refs/tags/v1.2.1.tar.gz
 
 ## Install
 
